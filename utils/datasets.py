@@ -16,6 +16,7 @@ from skimage.transform import resize
 
 import sys
 
+
 class ImageFolder(Dataset):
     def __init__(self, folder_path, img_size=416):
         self.files = sorted(glob.glob('%s/*.*' % folder_path))
@@ -30,7 +31,8 @@ class ImageFolder(Dataset):
         # Upper (left) and lower (right) padding
         pad1, pad2 = dim_diff // 2, dim_diff - dim_diff // 2
         # Determine padding
-        pad = ((pad1, pad2), (0, 0), (0, 0)) if h <= w else ((0, 0), (pad1, pad2), (0, 0))
+        pad = ((pad1, pad2), (0, 0), (0, 0)) if h <= w else (
+            (0, 0), (pad1, pad2), (0, 0))
         # Add padding
         input_img = np.pad(img, pad, 'constant', constant_values=127.5) / 255.
         # Resize and normalize
@@ -50,31 +52,42 @@ class ListDataset(Dataset):
     def __init__(self, list_path, img_size=416):
         with open(list_path, 'r') as file:
             self.img_files = file.readlines()
-        self.label_files = [path.replace('images', 'labels').replace('.jpg', '.txt') for path in self.img_files]
+        self.label_files = [path.replace('images', 'labels').replace(
+            '.jpg', '.txt') for path in self.img_files]
+
+        self.label_files = [file.rstrip('\n') for file in self.label_files]
+        self.img_files = [file.rstrip('\n') for file in self.img_files]
+        # print('From datasets.py')
+        # print(self.label_files)
+        # print(self.img_files)
         self.img_shape = (img_size, img_size)
         self.max_objects = 1
 
     def __getitem__(self, index):
 
-        #---------
+        # ---------
         #  Image
-        #---------
+        # ---------
 
         img_path = self.img_files[index % len(self.img_files)].rstrip()
         img = np.array(Image.open(img_path))
 
         # Handles images with less than three channels
-        while len(img.shape) != 3:
-            index += 1
-            img_path = self.img_files[index % len(self.img_files)].rstrip()
-            img = np.array(Image.open(img_path))
+        # while len(img.shape) != 3:
+        #     index += 1
+        #     img_path = self.img_files[index % len(self.img_files)].rstrip()
+        #     img = np.array(Image.open(img_path))
+
+        if(len(img.shape) < 3):
+            img = np.stack((img,) * 3, axis=-1)
 
         h, w, _ = img.shape
         dim_diff = np.abs(h - w)
         # Upper (left) and lower (right) padding
         pad1, pad2 = dim_diff // 2, dim_diff - dim_diff // 2
         # Determine padding
-        pad = ((pad1, pad2), (0, 0), (0, 0)) if h <= w else ((0, 0), (pad1, pad2), (0, 0))
+        pad = ((pad1, pad2), (0, 0), (0, 0)) if h <= w else (
+            (0, 0), (pad1, pad2), (0, 0))
         # Add padding
         input_img = np.pad(img, pad, 'constant', constant_values=128) / 255.
         padded_h, padded_w, _ = input_img.shape
@@ -85,9 +98,9 @@ class ListDataset(Dataset):
         # As pytorch tensor
         input_img = torch.from_numpy(input_img).float()
 
-        #---------
+        # ---------
         #  Label
-        #---------
+        # ---------
 
         label_path = self.label_files[index % len(self.img_files)].rstrip()
 
@@ -112,7 +125,8 @@ class ListDataset(Dataset):
         # Fill matrix
         filled_labels = np.zeros((self.max_objects, 5))
         if labels is not None:
-            filled_labels[range(len(labels))[:self.max_objects]] = labels[:self.max_objects]
+            filled_labels[range(len(labels))[:self.max_objects]
+                          ] = labels[:self.max_objects]
         filled_labels = torch.from_numpy(filled_labels)
 
         return img_path, input_img, filled_labels
