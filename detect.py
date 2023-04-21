@@ -17,7 +17,7 @@ import matplotlib.patches as patches
 from PIL import Image
 
 config_path = 'config/yolov3.cfg'
-weights_path = 'config/april20.weights'
+weights_path = sys.argv[1]
 class_path = 'config/coco.names'
 img_size = 416
 conf_thres = 0.9
@@ -67,7 +67,7 @@ def detect_image(img):
 
 
 # load image and get detections
-img_path = "data/artifacts/images/1091.jpg"
+img_path = sys.argv[2]
 prev_time = time.time()
 img = Image.open(img_path)
 detections = detect_image(img)
