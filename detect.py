@@ -17,7 +17,7 @@ import matplotlib.patches as patches
 from PIL import Image
 
 config_path = 'config/yolov3.cfg'
-weights_path = 'config/19.weights'
+weights_path = 'config/april20.weights'
 class_path = 'config/coco.names'
 img_size = 416
 conf_thres = 0.9
@@ -67,7 +67,7 @@ def detect_image(img):
 
 
 # load image and get detections
-img_path = "data/artifacts/images/3.jpg"
+img_path = "data/artifacts/images/1091.jpg"
 prev_time = time.time()
 img = Image.open(img_path)
 detections = detect_image(img)
@@ -101,7 +101,7 @@ if detections is not None:
         x1 = ((x1 - pad_x // 2) / unpad_w) * img.shape[1]
         color = bbox_colors[int(np.where(
             unique_labels == int(cls_pred))[0])]
-        bbox = patches.Rectangle((x1, y1), box_w+100, box_h+100,
+        bbox = patches.Rectangle((x1, y1), box_w, box_h,
                                  linewidth=2, edgecolor=color, facecolor='none')
         ax.add_patch(bbox)
         plt.text(x1, y1, s=classes[int(cls_pred)],
