@@ -1,6 +1,5 @@
 certifi==2022.12.7
 charset-normalizer==2.1.1
-colorama==0.4.6
 filelock==3.9.0
 idna==3.4
 imageio==2.27.0
@@ -10,6 +9,7 @@ MarkupSafe==2.1.2
 mpmath==1.2.1
 networkx==3.0
 numpy==1.24.1
+opencv-python==4.7.0.72
 packaging==23.1
 Pillow==9.3.0
 PyWavelets==1.4.1
@@ -18,9 +18,8 @@ scikit-image==0.20.0
 scipy==1.9.1
 sympy==1.11.1
 tifffile==2023.4.12
-torch==2.0.0
-torchaudio==2.0.1
-torchvision==0.15.1
-tqdm==4.65.0
+torch==2.0.0+cu117
+torchaudio==2.0.1+cu117
+torchvision==0.15.1+cu117
 typing_extensions==4.4.0
 urllib3==1.26.13
