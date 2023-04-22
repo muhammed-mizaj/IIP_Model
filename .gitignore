@@ -1,7 +1,6 @@
-config/*.weights
-forboxing/
-newlabels/
+iip_model/config/*.weights
 .vscode/
-data/
-env/
-checkpoints/
+iip_model/data/
+iip_model/env/
+iip_model/checkpoints/
+iip_model/*.rar
