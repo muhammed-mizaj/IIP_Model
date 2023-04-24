@@ -20,7 +20,7 @@ config_path = 'config/yolov3.cfg'
 weights_path = sys.argv[1]
 class_path = 'config/coco.names'
 img_size = 416
-conf_thres = 0.001
+conf_thres = 0.000
 nms_thres = 0.005
 # Load model and weights
 model = Darknet(config_path, img_size=img_size)
@@ -62,8 +62,7 @@ def detect_image(img):
 
         detections = non_max_suppression(Tensor.cpu(detections), 80,
                                          conf_thres, nms_thres)
-        print(len(detections[0]))
-        # print(detections)
+
     return detections[0]
 
 
@@ -91,17 +90,20 @@ if detections is not None:
     n_cls_preds = len(unique_labels)
     bbox_colors = random.sample(colors, n_cls_preds)
     # browse detections and draw bounding boxes
-    new_detections = [[] for i in range(n_cls_preds)]
-    for i in range(n_cls_preds):
-        new_detections[i] = list(filter(
-            lambda a: a[6] == i, detections))[0]
+    new_detections = []
 
-        print(new_detections)
+    for i in range(n_cls_preds):
+        detect_arr = list(filter(lambda a: a[6] == i, detections))
+        if (len(detect_arr) > 0):
+            new_detections.append(detect_arr[0])
+
+    print(len(new_detections))
+
     for x1, y1, x2, y2, conf, cls_conf, cls_pred in new_detections:
      #    print(int(cls_pred))
      #    print(classes)
-        print("{} {} {} {} {} {} {}".format(
-            x1, y1, x2, y2, conf, cls_conf, cls_pred))
+        # print("{} {} {} {} {} {} {}".format(
+        #     x1, y1, x2, y2, conf, cls_conf, cls_pred))
         box_h = ((y2 - y1) / unpad_h) * img.shape[0]
         box_w = ((x2 - x1) / unpad_w) * img.shape[1]
         y1 = ((y1 - pad_y // 2) / unpad_h) * img.shape[0]

@@ -35,7 +35,7 @@ with open(path.replace("images", "labels").replace(".jpg", ".txt"), "r") as file
 
         text = f"{class_label}"
         cv2.putText(image, text, (x1, y1-5),
-                    cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2)
+                    cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 255, 0), 2)
 
 image = cv2.resize(image, (1000, 1000))
 # Show the image with the bounding boxes

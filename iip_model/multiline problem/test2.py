@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from sklearn.cluster import KMeans
 # Load the image
-img = cv2.imread('unit_1.jpg')
+img = cv2.imread('item_description_3.jpg')
 pytesseract.pytesseract.tesseract_cmd = r'D:\Tesseract-OCR\tesseract.exe'
 # Apply OCR using Pytesseract
 data = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT)
@@ -83,7 +83,7 @@ for index, i in enumerate(line_boxes):
 center_y_coordinates_for_clustering = np.array(
     center_y_coordinates_for_clustering)
 
-num_clusters = 5
+num_clusters = 9
 
 
 kmeans = KMeans(n_clusters=num_clusters)
