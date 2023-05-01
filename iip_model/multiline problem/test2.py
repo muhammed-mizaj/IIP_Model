@@ -55,7 +55,7 @@ for i in range(n_boxes):
             line_boxes[line_box_index].append((x, y, w, h))
             words[line_box_index].append(data['text'][i])
         else:
-            if(abs(current_y - y) <= y_tolerance):
+            if (abs(current_y - y) <= y_tolerance):
                 line_boxes[line_box_index].append((x, y, w, h))
                 words[line_box_index].append(data['text'][i])
             else:

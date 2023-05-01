@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from PIL import Image
 
+
 config_path = 'config/yolov3.cfg'
 weights_path = sys.argv[1]
 class_path = 'config/coco.names'
@@ -98,7 +99,8 @@ if detections is not None:
             new_detections.append(detect_arr[0])
 
     print(len(new_detections))
-
+    # for i in new_detections:
+    #     print(i)
     for x1, y1, x2, y2, conf, cls_conf, cls_pred in new_detections:
      #    print(int(cls_pred))
      #    print(classes)
@@ -116,6 +118,7 @@ if detections is not None:
         plt.text(x1, y1, s=classes[int(cls_pred)],
                  color='white', verticalalignment='top',
                  bbox={'color': color, 'pad': 0})
+
 plt.axis('off')
 # save image
 plt.savefig(img_path.replace("images", "detections").replace(".jpg", "-det.jpg"),
