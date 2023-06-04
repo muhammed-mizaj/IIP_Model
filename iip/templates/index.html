@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <meta charset="UTF-8" /><title>Intelligent Invoice Parser</title
-  ><style>
+  >
+  <style>
     @import url(https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
+    @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
     * {
       font-family: Archivo, sans-serif;
       box-sizing: border-box;
       outline: 0;
     }
+    
     .hidden {
       display: none;
     }
     body {
       margin: 0;
       padding: 0;
+      background-color: #84a98c;
     }
     .step {
       max-width: 700px;
@@ -22,6 +27,7 @@
       padding: 10px 25px;
       border-radius: 5px;
       min-width: 300px;
+      font-family: sans-serif;
     }
     input[type="file"] {
       width: 100%;
@@ -37,12 +43,12 @@
       padding: 10px 25px;
     }
     input[type="text"]:focus {
-      border: 2px solid #006cff;
+      border: 2px solid #2f3e46;
     }
     button {
       display: block;
       padding: 10px 25px;
-      background: #006cff;
+      background: #354f52;
       border: 0;
       border-radius: 5px;
       font-size: 1em;
@@ -54,29 +60,29 @@
     input[disabled] {
       background: #bdbdbd;
       cursor: not-allowed;
-      color: #fff;
+      color: #cad2c5;
     }
     input[disabled] {
       border: 2px solid #bdbdbd;
     }
     button:not([disabled]):hover {
-      background: #0038ff;
+      background: #2f3e46;
     }
     button:not([disabled]):active {
-      background: #001768;
+      background: #2f3e46;
     }
     a {
       color: #0038ff;
     }
     .results {
-      background: #01b200;
-      color: #fff;
+      background: #354f52;
+      color: #cad2c5;
       padding: 10px 25px;
       border-radius: 5px;
     }
     .thinking {
-      background: #0066e4;
-      color: #fff;
+      background: #354f52;
+      color: #cad2c5;
       padding: 10px 25px;
       border-radius: 5px;
       animation: thinking 1s linear infinite;
@@ -90,7 +96,49 @@
         opacity: 75%;
       }
     }
+    .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #354f52;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  width: fit-content;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: cursive;
+  
+}
+
+.button {
+  background-color: #34D399;
+  color: #FFF;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.button:hover {
+  background-color: #10B981;
+}
+
   </style>
+  <div>
+  <nav class="navbar">
+  <div class="logo">iip.</div>
+  
+</nav>
+
+
+  </div>
   <div class="step" id="step1">
     <h1>Step 1: Upload your Invoice</h1>
     <input
@@ -103,13 +151,13 @@
     />
     <button
       id="nextBtn"
-      class="hidden next"
+      class="next"
       onclick='document.getElementById("step1").style.display="none",document.getElementById("step2").style.display="block"'
     >
       Upload
     </button>
   </div>
-  <div class="hidden step" id="step2">
+  <div class="step" id="step2">
     <h1>Step 2: Parse Contents</h1>
 
     <form onsubmit="return ask()">
