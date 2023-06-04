@@ -1,250 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
-  <meta charset="UTF-8" /><title>Intelligent Invoice Parser</title
-  >
-  <style>
-    @import url(https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
-    @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+<meta charset="UTF-8" />
+<title>Intelligent Invoice Parser</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url(https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
+  @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
-    * {
-      font-family: Archivo, sans-serif;
-      box-sizing: border-box;
-      outline: 0;
-    }
-    
-    .hidden {
-      display: none;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #84a98c;
-    }
-    .step {
-      max-width: 700px;
-      margin: 50px auto 25px auto;
-      border: 1.5px solid #ebebeb;
-      padding: 10px 25px;
-      border-radius: 5px;
-      min-width: 300px;
-      font-family: sans-serif;
-    }
-    input[type="file"] {
-      width: 100%;
-      background: #ebebeb;
-      padding: 10px 25px;
-      border-radius: 5px;
-    }
-    input[type="text"] {
-      width: 100%;
-      border: 2px solid #ebebeb;
-      border-radius: 5px;
-      font-size: 1em;
-      padding: 10px 25px;
-    }
-    input[type="text"]:focus {
-      border: 2px solid #2f3e46;
-    }
-    button {
-      display: block;
-      padding: 10px 25px;
-      background: #354f52;
-      border: 0;
-      border-radius: 5px;
-      font-size: 1em;
-      margin-top: 10px;
-      cursor: pointer;
-      color: #fff;
-    }
-    button[disabled],
-    input[disabled] {
-      background: #bdbdbd;
-      cursor: not-allowed;
-      color: #cad2c5;
-    }
-    input[disabled] {
-      border: 2px solid #bdbdbd;
-    }
-    button:not([disabled]):hover {
-      background: #2f3e46;
-    }
-    button:not([disabled]):active {
-      background: #2f3e46;
-    }
-    a {
-      color: #0038ff;
-    }
-    .results {
-      background: #354f52;
-      color: #cad2c5;
-      padding: 10px 25px;
-      border-radius: 5px;
-    }
-    .thinking {
-      background: #354f52;
-      color: #cad2c5;
-      padding: 10px 25px;
-      border-radius: 5px;
-      animation: thinking 1s linear infinite;
-    }
-    @keyframes thinking {
-      0%,
-      100% {
-        opacity: 100%;
-      }
-      50% {
-        opacity: 75%;
-      }
-    }
-    .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #354f52;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 0.5rem;
-  width: fit-content;
-}
+  * {
+    font-family: Archivo, sans-serif;
+    box-sizing: border-box;
+    outline: 0;
+  }
 
-.logo {
-  display: flex;
-  align-items: center;
-  text-transform: uppercase;
-  font-size: 2rem;
-  font-weight: bold;
-  font-family: cursive;
-  
-}
+  .hidden {
+    display: none;
+  }
 
-.button {
-  background-color: #34D399;
-  color: #FFF;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  margin-right: 0.5rem;
-  border-radius: 0.25rem;
-}
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #c9c9c9;
+  }
 
-.button:hover {
-  background-color: #10B981;
-}
+  .step {
+    max-width: 700px;
+    margin: 50px auto 25px auto;
+    border: 1.5px solid #ebebeb;
+    padding: 10px 25px;
+    border-radius: 5px;
+    min-width: 300px;
+    font-family: sans-serif;
+  }
 
-  </style>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
+  input[type="file"] {
+    width: 100%;
+    background: #ebebeb;
+    padding: 10px 25px;
+    border-radius: 5px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    border: 2px solid #ebebeb;
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 10px 25px;
+  }
+
+  input[type="text"]:focus {
+    border: 2px solid #2f3e46;
+  }
+
+  button {
+    display: block;
+    padding: 10px 25px;
+    background: #354f52;
+    border: 0;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  button[disabled],
+  input[disabled] {
+    background: #bdbdbd;
+    cursor: not-allowed;
+    color: #cad2c5;
+  }
+
+  input[disabled] {
+    border: 2px solid #bdbdbd;
+  }
+
+  button:not([disabled]):hover {
+    background: #2f3e46;
+  }
+
+  button:not([disabled]):active {
+    background: #2f3e46;
+  }
+
+  a {
+    color: #0038ff;
+  }
+
+  .results {
+    background: #354f52;
+    color: #cad2c5;
+    padding: 10px 25px;
+    border-radius: 5px;
+  }
+
+  .thinking {
+    background: #354f52;
+    color: #cad2c5;
+    padding: 10px 25px;
+    border-radius: 5px;
+    animation: thinking 1s linear infinite;
+  }
+
+  @keyframes thinking {
+
+    0%,
+    100% {
+      opacity: 100%;
     }
-  
-    th, td {
-      border: 1px solid #ebebeb;
-      padding: 8px;
-      text-align: left;
+
+    50% {
+      opacity: 75%;
     }
-  </style>
-  <div>
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #354f52;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    width: fit-content;
+  }
+
+  .parent-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    overflow: hidden;
+  }
+
+
+  .logo {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: cursive;
+
+  }
+
+  .button {
+    background-color: #34D399;
+    color: #FFF;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .button:hover {
+    background-color: #10B981;
+  }
+</style>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    border: 1px solid #ebebeb;
+    padding: 8px;
+    text-align: left;
+  }
+</style>
+<div class="l justify-center items-center">
   <nav class="navbar">
-  <div class="logo">iip.</div>
-  
-</nav>
+    <div class="logo">iip.</div>
 
+  </nav>
+  <div class=" parent-wrapper ">
+    <div class="flex flex-row text-xl">
+      <div class="step m-16" id="step1">
+        <h1>Step 1: Upload your Invoice</h1>
+        <input id="file" required accept=".pdf,.png,.jpg,.jpeg,.gif" name="file"
+          oninput='document.getElementById("nextBtn").style.display="block"' type="file" />
+        <button id="nextBtn" class="next"
+          onclick='document.getElementById("step1").style.display="none",document.getElementById("step2").style.display="block"'>
+          Upload
+        </button>
+      </div>
+      <div class="step m-16" id="step2">
+        <h1>Step 2: Parse Contents</h1>
 
+        <form onsubmit="return ask()">
+          <button id="askbtn" type="submit">Parse</button>
+        </form>
+        <table class="hidden item_table" id="items">
+          <tbody>
+            <tr>
+              <th>Item Name</th>
+              <th>Unit</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="hidden thinking" id="thinking">Hmm... Let me think...</p>
+        <p class="hidden results" id="results"></p>
+      </div>
+    </div>
   </div>
-  <div class="step" id="step1">
-    <h1>Step 1: Upload your Invoice</h1>
-    <input
-      id="file"
-      required
-      accept=".pdf,.png,.jpg,.jpeg,.gif"
-      name="file"
-      oninput='document.getElementById("nextBtn").style.display="block"'
-      type="file"
-    />
-    <button
-      id="nextBtn"
-      class="next"
-      onclick='document.getElementById("step1").style.display="none",document.getElementById("step2").style.display="block"'
-    >
-      Upload
-    </button>
-  </div>
-  <div class="step" id="step2">
-    <h1>Step 2: Parse Contents</h1>
 
-    <form onsubmit="return ask()">
-      <button id="askbtn" type="submit">Parse</button>
-    </form>
-    <table class="hidden item_table" id="items">
-      <tbody>
-        <tr>
-          <th>Item Name</th>
-          <th>Unit</th>
-          <th>Quantity</th>
-          <th>Price</th>
-        </tr>
-      </tbody>
-    </table>
 
-    <p class="hidden thinking" id="thinking">Hmm... Let me think...</p>
-    <p class="hidden results" id="results"></p>
-  </div>
-  <script>
-    function ask() {
-      var e = new XMLHttpRequest();
-      document.getElementById("thinking").classList.remove("hidden"),
-        document.getElementById("askbtn").setAttribute("disabled", !0),
-        document.getElementById("results").classList.add("hidden"),
-        (e.onreadystatechange = function () {
-          if (e.readyState === 4 && e.status === 200) {
-            document.getElementById("results").classList.remove("hidden");
-            document.getElementById("thinking").classList.add("hidden");
-            document.getElementById("items").classList.remove("hidden");
-            console.log(e.responseText);
-            const response = JSON.parse(e.responseText);
-            const items = response.items;
+</div>
 
-            // Get a reference to the table body
-            const tableBody = document
-              .getElementById("items")
-              .getElementsByTagName("tbody")[0];
 
-            tableBody.innerHTML =
-              "<tr><th>Itemname</th><th>Unit</th><th>Quantity</th><th>Price</th></tr>";
 
-            items.forEach((item) => {
-              const row = document.createElement("tr");
+<script>
+  function ask() {
+    var e = new XMLHttpRequest();
+    document.getElementById("thinking").classList.remove("hidden"),
+      document.getElementById("askbtn").setAttribute("disabled", !0),
+      document.getElementById("results").classList.add("hidden"),
+      (e.onreadystatechange = function () {
+        if (e.readyState === 4 && e.status === 200) {
+          document.getElementById("results").classList.remove("hidden");
+          document.getElementById("thinking").classList.add("hidden");
+          document.getElementById("items").classList.remove("hidden");
+          console.log(e.responseText);
+          const response = JSON.parse(e.responseText);
+          const items = response.items;
 
-              const itemNameCell = document.createElement("td");
-              itemNameCell.textContent = item.itemname;
+          // Get a reference to the table body
+          const tableBody = document
+            .getElementById("items")
+            .getElementsByTagName("tbody")[0];
 
-              const unitCell = document.createElement("td");
-              unitCell.textContent = item.unit;
+          tableBody.innerHTML =
+            "<tr><th>Itemname</th><th>Unit</th><th>Quantity</th><th>Price</th></tr>";
 
-              const quantityCell = document.createElement("td");
-              quantityCell.textContent = item.qty;
+          items.forEach((item) => {
+            const row = document.createElement("tr");
 
-              const priceCell = document.createElement("td");
-              priceCell.textContent = item.price;
-              row.appendChild(itemNameCell);
-              row.appendChild(unitCell);
-              row.appendChild(quantityCell);
-              row.appendChild(priceCell);
+            const itemNameCell = document.createElement("td");
+            itemNameCell.textContent = item.itemname;
 
-              // Append the row to the table body
-              tableBody.appendChild(row);
-            });
-            document.getElementById("askbtn").removeAttribute("disabled");
-          }
-        }),
-        e.open("POST", "/invoice");
-      var t = new FormData();
-      return (
-        t.append("file", document.getElementById("file").files[0]),
-        t.append("question", "NO Question"),
-        e.send(t),
-        !1
-      );
-    }
-  </script>
+            const unitCell = document.createElement("td");
+            unitCell.textContent = item.unit;
+
+            const quantityCell = document.createElement("td");
+            quantityCell.textContent = item.qty;
+
+            const priceCell = document.createElement("td");
+            priceCell.textContent = item.price;
+            row.appendChild(itemNameCell);
+            row.appendChild(unitCell);
+            row.appendChild(quantityCell);
+            row.appendChild(priceCell);
+
+            // Append the row to the table body
+            tableBody.appendChild(row);
+          });
+          document.getElementById("askbtn").removeAttribute("disabled");
+        }
+      }),
+      e.open("POST", "/invoice");
+    var t = new FormData();
+    return (
+      t.append("file", document.getElementById("file").files[0]),
+      t.append("question", "NO Question"),
+      e.send(t),
+      !1
+    );
+  }
+</script>
+
 </html>
