@@ -8,6 +8,7 @@ from pdf2image import convert_from_path
 import uuid
 import tempfile
 from PIL import Image
+from invoice_parser.parser import parse_invoice
 # from transformers import pipeline
 print('Starting pipeline...')
 app = Flask(__name__)
@@ -83,14 +84,12 @@ def upload():
                 filename = fileid + '.' + ext
                 filename = secure_filename(filename)
                 file.save(os.path.join('uploads', filename))
-            # answers = nlp('uploads/' + filename, question)
-            answers=[]
-            if len(answers) == 0:
-                os.remove(os.path.join(os.getcwd(), 'uploads/' + filename))
-                return 'Sorry, I can\'t find the answer for that question. Please try again with a different document.'
-            answer = answers[0]
+            
+            parser_output=parse_invoice()
             os.remove(os.path.join(os.getcwd(), 'uploads/' + filename))
-            return 'I am ' + str(answer['score'] * 100) + '% sure that the answer is: ' + str(answer['answer']) + '.'
+            return parser_output
+            
+            
 # {'score': 0.9943977, 'answer': 'us-001', 'start': 15, 'end': 15}
 
 #            return redirect(url_for('upload', name=filename))
