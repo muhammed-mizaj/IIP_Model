@@ -85,7 +85,7 @@ def upload():
                 filename = secure_filename(filename)
                 file.save(os.path.join('uploads', filename))
             
-            parser_output=parse_invoice()
+            parser_output=parse_invoice(Image.open(os.path.join(os.getcwd(), 'uploads/' + filename)))
             os.remove(os.path.join(os.getcwd(), 'uploads/' + filename))
             return parser_output
             

@@ -4,3 +4,4 @@ iip_model/data/
 iip_model/env/
 iip_model/checkpoints/
 iip_model/*.rar
+iip/invoice_parser/weights/*.weights
