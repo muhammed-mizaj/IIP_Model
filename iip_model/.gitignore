@@ -1,7 +1,0 @@
-config/*.weights
-forboxing/
-newlabels/
-.vscode/
-data/
-env/
-checkpoints/

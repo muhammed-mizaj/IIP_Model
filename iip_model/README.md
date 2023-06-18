@@ -1,1 +1,0 @@
-# Training YOLO with invoices

@@ -1,7 +1,6 @@
-iip_model/config/*.weights
 .vscode/
-iip_model/data/
-iip_model/env/
-iip_model/checkpoints/
-iip_model/*.rar
-iip/invoice_parser/weights/*.weights
+yolov5/datasets/
+yolov5/runs/
+iip/invoice_parser/datasets
+iip/invoice_parser/runs
+iip/invoice_parser/weights

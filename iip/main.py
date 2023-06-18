@@ -1,5 +1,4 @@
 print('Importing modules...')
-import flask
 import os
 from flask import Flask, render_template, request, session, redirect, url_for
 from waitress import serve
@@ -85,7 +84,7 @@ def upload():
                 filename = secure_filename(filename)
                 file.save(os.path.join('uploads', filename))
             
-            parser_output=parse_invoice(Image.open(os.path.join(os.getcwd(), 'uploads/' + filename)))
+            parser_output=parse_invoice(os.path.join(os.getcwd(), 'uploads/' + filename))
             os.remove(os.path.join(os.getcwd(), 'uploads/' + filename))
             return parser_output
             
@@ -95,4 +94,4 @@ def upload():
 #            return redirect(url_for('upload', name=filename))
 
 print('Server started!')
-serve(app, host='0.0.0.0', port=2718)
+serve(app, host='0.0.0.0', port=2717)

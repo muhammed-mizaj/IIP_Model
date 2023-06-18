@@ -1,6 +1,0 @@
-classes=5
-train=data/artifacts/train.txt
-valid=data/artifacts/val.txt
-names=config/coco.names
-backup=backup/
-
